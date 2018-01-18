@@ -1,28 +1,43 @@
+#!/usr/bin/env python
+
 import os
 import sys
 import subprocess
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+from PIL import Image
+
+if os.geteuid() != 0:
+    os.execvp("sudo", ["sudo"]+["python3"] + sys.argv) #To check root priviledges
 
 
+global_path=""
 def set_image(path):
     to_write="GRUB_BACKGROUND="+path
     f=open('/etc/default/grub','a+')
     f.write(to_write)
+    f.close()
 
 #main window
 root=Tk()
 root.title("GRIM")
-root.geometry("380x120")
+root.geometry("420x120")
 
 def select_image():
     root.filename = filedialog.askopenfilename(title="Select file",filetypes = (("png","*.png"),("All files","*.*")))
-    path=root.filename
+    global_path=root.filename
     set_image(path)
 
 #def download_image()
-#def preview_image()
+def preview_image():
+    if(global_path==""):
+        window=Toplevel(root)
+        NALINE=Label(window,text="No image has been selected")
+        NALINE.pack()
+    else:
+        img=Image.open(global_path)
+        img.show()
 
 Fline=Label(root,text="This program modifies the grub file in order to function properly")
 Sline=Label(root,text="Use at your own risk")
