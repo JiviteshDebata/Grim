@@ -42,8 +42,10 @@ def download_image():
     Fline=Label(window,text="Enter URL").grid(row=0)
     Sline=Label(window,text="Enter Tags").grid(row=1)
     Tline=Label(window,text="Keep in mind to separate tags by spaces").grid(row=2,pady=10,sticky=S)
-    String Url=URL.get()
-    String Tag=tag.get()
+    URL.grid(row=0,sticky=E)
+    TAG.grid(row=0,sticky=E)
+    Url=URL.get()
+    Tag=tag.get()
 
 def preview_image():
     global path
@@ -63,7 +65,7 @@ root.geometry("420x120")
 Fline=Label(root,text="This program modifies the grub file in order to function properly")
 Sline=Label(root,text="Use at your own risk")
 Sel_Img=Button(root ,text="Select Image",command=lambda:select_image())
-Dwn_Img=Button(root ,text="Download Image"command=lambda:download_image())
+Dwn_Img=Button(root ,text="Download Image",command=lambda:download_image())
 Prv_Img=Button(root ,text="Preview Image",command=lambda:preview_image())
 
 #Allignment
