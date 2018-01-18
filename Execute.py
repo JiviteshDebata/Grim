@@ -12,32 +12,34 @@ if os.geteuid() != 0:
     os.execvp("sudo", ["sudo"]+["python3"] + sys.argv) #To check root priviledges
 
 
-global_path=""
-def set_image(path):
-    to_write="GRUB_BACKGROUND="+path
+path=""
+def set_image(data):
+    to_write="GRUB_BACKGROUND="+data
     f=open('/etc/default/grub','a+')
     f.write(to_write)
     f.close()
+
+def select_image():
+    global path
+    root.filename = filedialog.askopenfilename(title="Select file",filetypes = (("png","*.png"),("All files","*.*")))
+    path=root.filename
+    set_image(path)
+
+#def download_image()
+def preview_image():
+    global path
+    if(path==""):
+        window=Toplevel(root)
+        NALINE=Label(window,text="No image has been selected")
+        NALINE.pack()
+    else:
+        img=Image.open(path)
+        img.show()
 
 #main window
 root=Tk()
 root.title("GRIM")
 root.geometry("420x120")
-
-def select_image():
-    root.filename = filedialog.askopenfilename(title="Select file",filetypes = (("png","*.png"),("All files","*.*")))
-    global_path=root.filename
-    set_image(path)
-
-#def download_image()
-def preview_image():
-    if(global_path==""):
-        window=Toplevel(root)
-        NALINE=Label(window,text="No image has been selected")
-        NALINE.pack()
-    else:
-        img=Image.open(global_path)
-        img.show()
 
 Fline=Label(root,text="This program modifies the grub file in order to function properly")
 Sline=Label(root,text="Use at your own risk")
