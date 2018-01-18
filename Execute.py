@@ -43,7 +43,7 @@ Fline=Label(root,text="This program modifies the grub file in order to function 
 Sline=Label(root,text="Use at your own risk")
 Sel_Img=Button(root ,text="Select Image",command=lambda:select_image())
 Dwn_Img=Button(root ,text="Download Image")
-Prv_Img=Button(root ,text="Preview Image")
+Prv_Img=Button(root ,text="Preview Image",command=lambda:preview_image())
 
 #Allignment
 Fline.grid(row=0,pady=2,padx=20,sticky=W)
