@@ -42,8 +42,8 @@ def download_image():
     Fline=Label(window,text="Enter URL").grid(row=0)
     Sline=Label(window,text="Enter Tags").grid(row=1)
     Tline=Label(window,text="Keep in mind to separate tags by spaces").grid(row=2,pady=10,sticky=S)
-    URL.grid(row=0,sticky=E)
-    TAG.grid(row=0,sticky=E)
+    URL.grid(row=0,column=1,sticky=E)
+    TAG.grid(row=1,column=1,sticky=E)
     Url=URL.get()
     Tag=tag.get()
 
